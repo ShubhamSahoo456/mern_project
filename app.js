@@ -1,21 +1,15 @@
+const dotenv = require('dotenv');
 const express = require('express');
-const mongoose = require('mongoose');
+dotenv.config({path:'./config.env'});
 
+require('./db/conn');
 const app = express();
-const port = process.env.PORT || 8000;
 
-const db="mongodb+srv://shubhamsahoo:Android161718@cluster0.jjeue.mongodb.net/mernstack?retryWrites=true&w=majority";
 
-mongoose.connect(db,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-    useCreateIndex:true,
-    useFindAndModify:false
-}).then(()=>{
-    console.log('connection successful');
-}).catch((error)=>{
-    console.log('connection failed');
-})
+
+
+
+const ports=process.env.PORT;
 
 
 
@@ -39,6 +33,6 @@ app.get("/signup",(req,res)=>{
     res.send('hello this is sign up page');
 });
 
-app.listen(port,()=>{
-    console.log(port+" is listening");
+app.listen(ports,()=>{
+    console.log(ports+" is listening");
 })

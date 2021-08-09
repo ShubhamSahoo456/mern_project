@@ -18,3 +18,101 @@
     /* border-bottom: 0.2rem solid black; */
     text-decoration: none;
 }
+
+.main_div{
+    width:60vw;
+    height:85vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+-webkit-box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+-moz-box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+border-radius: 1rem;
+}
+
+
+.sign_div{
+    width:60vw;
+    height:60vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+-webkit-box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+-moz-box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+border-radius: 1rem;
+}
+
+.input_div{
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid grey;
+}
+
+.input_div input{
+    border: 0;
+    outline: 0;
+
+}
+
+.text_{
+    font-weight: 1000;
+}
+
+.img_div{
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.img_div img{
+    width: 100%;
+    height: 50%;
+}
+
+.contact_div{
+    height: 80vh;
+
+}
+
+.upper_block{
+    height: 10vh;
+    box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+-webkit-box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+-moz-box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+background: hsl(210, 15%, 96%);
+border-radius: 0.2rem;
+border: 2px solid #d2dae2;
+}
+
+.block_content{
+    height: 100%;
+}
+
+.p_block{
+    line-height: 0.4rem;
+    font-weight: 700;
+}
+
+.p_block p{
+    font-size: 0.7rem;
+}
+
+.logo{
+    color:#4bcffa;
+}
+
+.message_div{
+    box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+-webkit-box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+-moz-box-shadow: -1px 10px 13px -1px rgba(0,0,0,0.48);
+    height: 60vh;
+    border-radius: 0.7rem;
+}

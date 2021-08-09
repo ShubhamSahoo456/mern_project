@@ -1,7 +1,6 @@
 import react from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { NavLink } from 'react-router-dom';
-import Logo from '../images/IBLONDE.png'
 
 
 const Navbar = ()=>{
@@ -9,7 +8,10 @@ const Navbar = ()=>{
     return(
         <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <NavLink exact to="/"><img src={Logo} alt=""/></NavLink>
+        <NavLink exact to="/" activeClassName="selected" className="link"  activeStyle={{
+                                                                                            color: "black",
+                                                                                        }}>
+        LIFETRENZ</NavLink>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>

@@ -6,7 +6,13 @@ const Home =()=>{
 
     return(
         <>
-        <h1>hello this is Home page</h1>
+        <div className="home_div">
+            <div className="center_div">
+                    <p className="text-center">Welcome</p>
+                    <h1>We Are The Mern Developer</h1>
+            </div>
+        </div>
+        
         </>
     );
 }

@@ -13,7 +13,6 @@ const ports=process.env.PORT;
 app.use(require('./routing/routers'));
 
 
-
 app.listen(ports,()=>{
     console.log(ports+" is listening");
 })

@@ -16,12 +16,12 @@ const Signin = ()=>{
             <h4  className="text-center mb-3 text_">Sign In</h4>
                 
                 <div className="form-group input_div">
-                    <label for="email"><i class="fas fa-envelope mt-3"></i></label>
+                    <label for="email"><i className="fas fa-envelope mt-3"></i></label>
                     <input type="email" className="form-control" id="email" placeholder="Your Email" />
                 </div>
                
                 <div className="form-group input_div">
-                    <label for="password"><i class="fas fa-lock mt-3"></i></label>
+                    <label for="password"><i className="fas fa-lock mt-3"></i></label>
                     <input type="password" className="form-control" id="password" aria-describedby="emailHelp" placeholder="Your Password" />
                 </div>
                

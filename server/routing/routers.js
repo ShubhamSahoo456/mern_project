@@ -22,7 +22,7 @@ router.post("/register",async(req,res)=>{
             res.status(500).json({message:'email already exists',status:false});
         }else{
             if(password != cpassword){
-                res.status(400).json({message:'password not matching',status:false});
+                res.status(402).json({message:'password not matching',status:false});
             }else{
                 const user = new User({name,email,phone,work,password,cpassword});
     
@@ -37,6 +37,7 @@ router.post("/register",async(req,res)=>{
     }
 
 });
+
 
 
 //post method for login user with validation
@@ -65,21 +66,5 @@ router.post("/signin",async(req,res)=>{
 });
 
 
-router.get("/aboutus",(req,res)=>{
-    
-    res.send('heloo this is about us page');
-});
-
-router.get("/contactus",(req,res)=>{
-    res.send('hello this is contact us page');
-});
-
-router.get("/signin",(req,res)=>{
-    res.send('hello this is signin page');
-});
-
-router.get("/register",(req,res)=>{
-    res.send('hello this is sign up page');
-});
 
 module.exports = router;

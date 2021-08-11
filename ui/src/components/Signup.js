@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import Image from '../images/sign_up.svg';
 
 const Signup = ()=>{
 
+    const history = useHistory();
     const [user , setUser] = useState({
         name:"",email:"",mobile:"",work:"",password:"",cpassword:""
     });
@@ -27,10 +28,17 @@ const Signup = ()=>{
                     "Content-type":"application/json",
                     "Access-Control-Allow-Origin":"http://localhost:3000"
                 },
-                body: JSON.stringify({name:name,email:email,phone:mobile,work:work,password:password,cpassword:cpassword})
-            });
+                body: JSON.stringify({name:name,
+                                    email:email,
+                                    phone:mobile,
+                                    work:work,
+                                    password:password,
+                                    cpassword:cpassword})
+                });
     
             const response = await data.json();
+            
+            history.push('/signin');
             window.alert(response.message);
             
         }catch(error){

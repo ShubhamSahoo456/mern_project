@@ -1,8 +1,46 @@
-import react from 'react';
-import {NavLink} from 'react-router-dom';
+import react, { useState } from 'react';
+import {NavLink, useHistory} from 'react-router-dom';
 import Img from '../images/sign_in.svg';
 
 const Signin = ()=>{
+
+    const history = useHistory();
+    const[user,setUser] = useState({
+        email:"",
+        password:""
+    })
+    let name,value;
+
+    const validateUser = (event)=>{
+        name = event.target.name;
+        value = event.target.value;
+
+        console.log(name);
+        console.log(value);
+        setUser({...user,[name]:value});
+    }
+
+    const sendData = async(event)=>{
+        event.preventDefault();
+        const{email,password} = user;
+        const data = await fetch('/signin',{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            method:"POST",
+            body:JSON.stringify({email,password})
+        })
+
+        const jsondata = await data.json();
+        console.log(jsondata);
+        if(jsondata.status==false){
+            window.alert(jsondata.message);
+        }else{
+            history.push('/');
+            window.alert(jsondata.message);
+        }
+    }
+
 
     return(
         <>
@@ -17,15 +55,15 @@ const Signin = ()=>{
                 
                 <div className="form-group input_div">
                     <label for="email"><i className="fas fa-envelope mt-3"></i></label>
-                    <input type="email" className="form-control" id="email" placeholder="Your Email" />
+                    <input type="email" className="form-control" name="email" id="email" value={user.email} onChange={validateUser} placeholder="Your Email" />
                 </div>
                
                 <div className="form-group input_div">
                     <label for="password"><i className="fas fa-lock mt-3"></i></label>
-                    <input type="password" className="form-control" id="password" aria-describedby="emailHelp" placeholder="Your Password" />
+                    <input type="password" className="form-control" name="password" id="password" value={user.password} onChange={validateUser} aria-describedby="emailHelp" placeholder="Your Password" />
                 </div>
                
-                <button type="submit" className="btn btn-primary input_div">Submit</button>
+                <button type="submit" onClick={sendData} className="btn btn-primary input_div">Submit</button>
                 </form>
                
             </div>

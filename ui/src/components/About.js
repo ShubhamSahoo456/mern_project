@@ -1,13 +1,46 @@
-import react from 'react';
+import react, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import '../about.css';
 import Profile from '../images/03.jpg'
 
 const About = ()=>{
 
+    const history = useHistory();
+    const [user,setUser] = useState("");
+
+    const validateUser =async()=>{
+        try{
+            const res = await fetch("/api/about",{
+                method:"GET",
+                headers:{
+                    Accept:"application/json",
+                    "Content-Type":"application/json"
+                },
+                credentials:"include"
+            })
+
+            const data = await res.json();
+            if(!res.status==200){
+                const error = new Error(res.error);
+                throw error;
+            }
+            console.log(data);
+            setUser(data);
+
+        }catch(error){
+            history.push('/signin');
+        }
+    }
+
+
+    useEffect(()=>{
+        validateUser();
+    },[])
+
     return(
         <>
             <div className="container emp-profile">
-                        <form method="">
+                        <form method="GET">
                             <div className="row">
                                 <div className="col-md-4">
                                     <div className="profile-img">
@@ -21,10 +54,10 @@ const About = ()=>{
                                 <div className="col-md-6">
                                     <div className="profile-head">
                                                 <h5>
-                                                    Shubham Sahoo
+                                                    {user.name}
                                                 </h5>
                                                 <h6>
-                                                    Web Developer and Designer
+                                                    {user.work}
                                                 </h6>
                                                 <p className="proile-rating">RANKINGS : <span>1/10</span></p>
                                         <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -72,7 +105,7 @@ const About = ()=>{
                                                             <label>Name</label>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <p>Shubham Sahoo</p>
+                                                            <p>{user.name}</p>
                                                         </div>
                                                     </div>
                                                     <div className="row">
@@ -80,15 +113,15 @@ const About = ()=>{
                                                             <label>Email</label>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <p>Shubham.sahoo456@gmail.com</p>
+                                                            <p>{user.email}</p>
                                                         </div>
                                                     </div>
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <label>Phone</label>
+                                                            <label>Mobile</label>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <p>7000622876</p>
+                                                            <p>{user.phone}</p>
                                                         </div>
                                                     </div>
                                                     <div className="row">
@@ -96,7 +129,7 @@ const About = ()=>{
                                                             <label>Profession</label>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <p>Web Developer and Designer</p>
+                                                            <p>{user.work}</p>
                                                         </div>
                                                     </div>
                                         </div>

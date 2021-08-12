@@ -3,6 +3,7 @@ const User = require('../db/schema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
+const authenticate = require('../middlewares/authenticate')
 
 router.get("/",(req,res)=>{
     res.send('router js')
@@ -64,6 +65,13 @@ router.post("/signin",async(req,res)=>{
         }
     }
 });
+
+
+//get method for about page verify jwt token
+router.get("/api/about",authenticate,(req,res)=>{
+    console.log('hello from this side');
+    res.status(200).send(req.rootuser);
+})
 
 
 

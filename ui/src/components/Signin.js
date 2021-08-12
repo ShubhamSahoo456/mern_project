@@ -15,8 +15,6 @@ const Signin = ()=>{
         name = event.target.name;
         value = event.target.value;
 
-        console.log(name);
-        console.log(value);
         setUser({...user,[name]:value});
     }
 

@@ -1,6 +1,65 @@
-import react from 'react';
+import react, { useEffect, useState } from 'react';
 
 const Contact =()=>{
+
+    const [user,setUser] = useState({name:"",email:"",phone:"",message:""});
+
+    
+    useEffect(()=>{
+        getUserData();
+    },[])
+    
+    const getUserData = async()=>{
+        const data = await fetch('/api/data',{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            method:"GET"
+        });
+
+        const jsonData = await data.json();
+        console.log(jsonData);
+        if(!data.status==200){
+            throw new Error('not found')
+        }else{
+            setUser({name:jsonData.name,email:jsonData.email,phone:jsonData.phone})
+        }
+    }
+
+
+    const messageData =(event)=>{
+        event.preventDefault();
+        const name = event.target.name;
+        const value = event.target.value;
+
+        setUser({...user,[name]:value});
+    }
+
+    const sendContactData = async(event)=>{
+        try{
+            event.preventDefault();
+            const {name,email,phone,message} = user;
+            const contactdata = await fetch("/api/contact",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({name,email,phone,message})
+            })
+    
+            const jsonmessage = await contactdata.json();
+            console.log(jsonmessage);
+            if(contactdata.status!=200){
+                window.alert(jsonmessage.error);
+            }else{
+                window.alert(jsonmessage.message);
+                setUser({...user,messsage:""});
+            }
+            
+        }catch(error){
+            console.log(error);
+        }
+    }
 
     return(
         <>
@@ -50,24 +109,26 @@ const Contact =()=>{
                     </div>
                     <div className="col-md-8 mx-auto my-3">
                         
-                        <form>
+                        <form method="POST">
                             <div className="d-flex flex-row justify-content-between">
                                 <div className="form-group input_div_text">
-                                    <input type="text" className="form-control" id="name" placeholder="Your name" />
+                                    <input type="text" className="form-control" id="name" name="name" onChange={messageData} value={user.name} placeholder="Your name" />
                                 </div>
 
                                 <div className="form-group input_div_text">
-                                    <input type="email" className="form-control" id="email" placeholder="Your email" />
+                                    <input type="email" className="form-control" id="email" name="email" onChange={messageData} value={user.email} placeholder="Your email" />
                                 </div>
 
                                 <div className="form-group input_div_text">
-                                    <input type="text" className="form-control" id="mobile" placeholder="Your phone" />
+                                    <input type="text" className="form-control" id="mobile" name="phone" onChange={messageData} value={user.phone} placeholder="Your phone" />
                                 </div>
                             </div>
                         
                             <div className="form-group input_div_text">
-                                <textarea className="form-control" id="message" rows="8" placeholder="message"></textarea>
+                                <textarea className="form-control" id="message" rows="8" value={user.message}  onChange={messageData} name="message" placeholder="message"></textarea>
                             </div>
+
+                            <button className="btn btn-primary" type="submit" onClick={sendContactData}>Send Message</button>
                         </form>
 
                     </div>

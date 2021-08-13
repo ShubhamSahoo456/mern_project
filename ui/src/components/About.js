@@ -5,6 +5,10 @@ import Profile from '../images/03.jpg'
 
 const About = ()=>{
 
+    useEffect(()=>{
+        validateUser();
+    },[])
+
     const history = useHistory();
     const [user,setUser] = useState("");
 
@@ -33,9 +37,7 @@ const About = ()=>{
     }
 
 
-    useEffect(()=>{
-        validateUser();
-    },[])
+
 
     return(
         <>

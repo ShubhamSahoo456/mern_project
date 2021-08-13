@@ -11,11 +11,12 @@ const authenticate =async(req,res,next)=>{
         const rootuser =await User.findOne({_id:verify_token._id,"tokens.token":token});
         
         if(!rootuser){
-            throw new Error('user not found')
+            res.json({error:"no records found"})
         }
 
         req.token=token;
         req.rootuser = rootuser;
+        req.userId = rootuser._id;
         next();
 
     }catch(error){

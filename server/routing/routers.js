@@ -5,10 +5,6 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const authenticate = require('../middlewares/authenticate')
 
-router.get("/",(req,res)=>{
-    res.send('router js')
-});
-
 
 //post method for registration with validation
 router.post("/register",async(req,res)=>{
@@ -66,10 +62,39 @@ router.post("/signin",async(req,res)=>{
     }
 });
 
+//post method for contavt page adding message schema 
+router.post("/api/contact",authenticate, async (req,res)=>{
+    try{
+        const {name,email,phone,message}  =req.body;
+        
+        if(!name || !email || !phone || !message){
+            res.status(401).json({error:"all fields are mandatory"})
+        }
+    
+        const userContact = await User.findOne({_id:req.userId});
+        if(userContact){
+            const userMessage = await userContact.addmessage(name,email,phone,message);
+            await userContact.save();
+            res.status(200).json({message:"message sent successfully"})
+
+        }else{
+            res.status(403).json({error:"signin first"});
+        }
+
+    }catch(error){
+        console.log(error);
+    }
+})
 
 //get method for about page verify jwt token
 router.get("/api/about",authenticate,(req,res)=>{
     console.log('hello from this side');
+    res.status(200).send(req.rootuser);
+});
+
+
+//get method to authenticate for hime and contact page
+router.get("/api/data",authenticate,(req,res)=>{
     res.status(200).send(req.rootuser);
 })
 

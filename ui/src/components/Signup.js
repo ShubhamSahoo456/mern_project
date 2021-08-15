@@ -22,11 +22,10 @@ const Signup = ()=>{
         event.preventDefault();
         const{name,email,mobile,work,password,cpassword} = user;
         try{
-            const data = await fetch('/register',{
+            const data = await fetch('/api/register',{
                 method:"POST",
                 headers:{
-                    "Content-type":"application/json",
-                    "Access-Control-Allow-Origin":"http://localhost:3000"
+                    "Content-type":"application/json"
                 },
                 body: JSON.stringify({name:name,
                                     email:email,

@@ -7,7 +7,7 @@ const authenticate = require('../middlewares/authenticate')
 
 
 //post method for registration with validation
-router.post("/register",async(req,res)=>{
+router.post("/api/register",async(req,res)=>{
     const {name,email,phone,work,password,cpassword} = req.body;
     if(!name || !email || !phone || !work || !password || !cpassword){
         res.status(422).json({message:"plzz fill all the fields",status:false});

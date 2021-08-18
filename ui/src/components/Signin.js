@@ -1,14 +1,18 @@
-import react, { useState } from 'react';
+import react, { useContext, useState } from 'react';
 import {NavLink, useHistory} from 'react-router-dom';
 import Img from '../images/sign_in.svg';
+import { UserContext } from '../App';
 
 const Signin = ()=>{
+
+    const {state,dispatch} = useContext(UserContext);
 
     const history = useHistory();
     const[user,setUser] = useState({
         email:"",
         password:""
-    })
+    });
+
     let name,value;
 
     const validateUser = (event)=>{
@@ -34,6 +38,7 @@ const Signin = ()=>{
         if(jsondata.status==false){
             window.alert(jsondata.message);
         }else{
+           dispatch({type:"USER",payload:true})
             history.push('/');
             window.alert(jsondata.message);
         }

@@ -3,7 +3,7 @@ const User = require('../db/schema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const authenticate = require('../middlewares/authenticate')
+const authenticate = require('../middlewares/authenticate');
 
 
 //post method for registration with validation
@@ -36,7 +36,6 @@ router.post("/api/register",async(req,res)=>{
 });
 
 
-
 //post method for login user with validation
 router.post("/signin",async(req,res)=>{
     const {email,password} = req.body;
@@ -62,6 +61,7 @@ router.post("/signin",async(req,res)=>{
     }
 });
 
+
 //post method for contavt page adding message schema 
 router.post("/api/contact",authenticate, async (req,res)=>{
     try{
@@ -86,6 +86,7 @@ router.post("/api/contact",authenticate, async (req,res)=>{
     }
 })
 
+
 //get method for about page verify jwt token
 router.get("/api/about",authenticate,(req,res)=>{
     console.log('hello from this side');
@@ -93,11 +94,16 @@ router.get("/api/about",authenticate,(req,res)=>{
 });
 
 
-//get method to authenticate for hime and contact page
+//get method to authenticate for home and contact page
 router.get("/api/data",authenticate,(req,res)=>{
     res.status(200).send(req.rootuser);
 })
 
+//get method for logout
+router.get("/api/logout",(req,res)=>{
+    res.clearCookie("jwt",{path:"/"});
+    res.status(200).json({message:"you have been logged out"});
+})
 
 
 module.exports = router;
